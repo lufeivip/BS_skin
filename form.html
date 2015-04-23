@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no"/>
+    <link rel="stylesheet" href="libs/bootstrap-3.3.2/dist/css/bootstrap.css"/>
+    <link rel="stylesheet" href="libs/font-awesome/font-awesome.min.css"/>
+    <link rel="stylesheet" href="css/ui.css"/>
+    <script src="js/jquery-2.0.3.js"></script>
+</head>
+<body>
+    <section class="container-fluid">
+        <div class="page-title">
+            <h3>Forms</h3>
+        </div>
+
+        <form class="form panel">
+            <div class="panel-heading">
+                <div class="panel-control">
+                    <button type="button" class="btn btn-default" data-toggle="collapse" data-target="#search-panel" aria-expanded="true"><i class="icon-caret-down"></i></button>
+                </div>
+                <h3 class="panel-title">Search</h3>
+            </div>
+            <div id="search-panel" class="collapse in">
+                <div class="panel-body">
+                    <div class="row">
+                        <div class="form-group col-xs-6 col-sm-3 col-md-2"><label for="" class="control-label">Label</label><input type="text" class="form-control"/></div>
+                        <div class="form-group col-xs-6 col-sm-3 col-md-2"><label for="" class="control-label">Select</label>
+                            <select class="form-control" name="" id="">
+                                <option value="">1</option>
+                                <option value="">2</option>
+                                <option value="">3</option>
+                            </select>
+                        </div>
+                        <div class="form-group col-sm-3 col-md-2"><label for="" class="control-label">Date</label>
+                            <!--<input type="text" class="form-control "/>-->
+                            <div class="input-group date">
+                                <input type="text" class="form-control datepicker">
+                                <span class="input-group-addon"><i class="icon-calendar icon-lg"></i></span>
+                            </div>
+                        </div>
+                        <div class="form-group col-sm-3 col-md-2"><label for="" class="control-label">Label</label><input type="text" class="form-control"/></div>
+                        <div class="form-group col-sm-3 col-md-2"><label for="" class="control-label">Label</label><input type="text" class="form-control"/></div>
+                        <div class="form-group col-sm-3 col-md-2"><label for="" class="control-label">Label</label><input type="text" class="form-control"/></div>
+                    </div>
+                </div>
+            </div>
+        </form>
+        <div class="row">
+            <div class="col-md-6">
+                <div class="panel">
+                    <div class="panel-heading">
+                        <h3 class="panel-title">title</h3>
+                    </div>
+                    <div class="panel-body">
+                        body
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="panel">
+                    <div class="panel-heading">
+                        <h3 class="panel-title">title</h3>
+                    </div>
+                    <div class="panel-body">
+                        body
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!--引用日期控件-->
+    <link rel="stylesheet" href="libs/datepicker/bootstrap-datetimepicker.css"/>
+    <script src="libs/datepicker/bootstrap-datetimepicker.js"></script>
+    <script>
+        $('.datepicker').datetimepicker({
+            format:'yyyy-mm-dd',
+            autoclose:1,
+            todayHighling:1,
+            minView:2
+        });
+    </script>
+</body>
+</html>

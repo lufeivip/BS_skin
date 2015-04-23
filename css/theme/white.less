@@ -1,0 +1,39 @@
+@import "theme";
+@theme-primary:#f8f8f8;//brand-primary
+@theme-primary-light:@theme-primary + #111;
+@theme-primary-dark:#ccc;
+@theme-secondary:#4a96d9;
+//header
+@header-bg:#fff;//页头底色
+@log-bg-img:"../img/logo_s.png";//logo背景图
+@log-bg-color:transparent;//logo底色
+@topbar-icon-color:#999;//顶栏icon颜色
+@topbar-icon-hover:#333;//顶栏icon悬浮色
+//navigator
+@nav-bg:#fff;//左导航栏底色
+@nav-link-bg-hover:transperant;//链接悬浮底色
+@nav-active-bg:transperent;//选中项底色
+@nav-header-color:#999;//一级标题颜色
+@nav-text-color:#666;//lighten(@theme-primary,25%);//导航文字颜色
+@subnav-text-color:#888;//导航文字颜色
+@nav-text-hover:#333;//导航悬浮颜色
+@nav-unfold-bg:transparent;//子菜单展开后底色
+
+#header{
+  border-bottom-color:@theme-primary-dark;
+  .logo{
+    &:before{
+      background-position:0 -50px;
+    }
+  }
+}
+#navigator{
+  border-right:1px solid @theme-primary-dark;
+  .nav-header{
+    margin:-1px 0 0;
+    padding:10px 15px;
+    //background-color:#f8f8f8;
+    border-top:1px solid @theme-primary-dark;
+  }
+  .nav{margin-bottom:5px;}
+}

@@ -1,0 +1,24 @@
+/*mixin_start*/
+.form-control-focus(@color: @brand-primary) {
+  &:focus {
+    border-color: @color;
+    outline: 0;
+    .box-shadow( 0 0 0px 2px lighten(@color,30%));
+  }
+}
+/*mixin_end*/
+.form-group{
+  &:extend(.clearfix all);
+}
+.form-control {
+  .box-shadow(0 0 0 transparent);
+  border-radius: @input-border-radius;
+  .form-control-focus();
+}
+.input-group-addon{border-radius:@border-radius-base}
+/*multiselect  自适应宽度*/
+select.multiselect{height:34px;}
+.btn.multiselect{float: none; display: block;  width: 100%; height:34px; text-align: left; }
+.btn.multiselect .caret {margin-left: 0;float: right;margin-top: 6px;}
+select.multiselect+.btn-group{display: block;}
+

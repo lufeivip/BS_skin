@@ -1,0 +1,63 @@
+//scrollbar
+/*=======================*/
+#header {
+  background-color:@header-bg;
+  border-bottom: 1px solid #eee;
+  .logo{
+    background:url(@log-bg-img) no-repeat 0 -50px ;
+    &:before{
+      background:url(@log-bg-img) no-repeat 0 0 @log-bg-color;
+    }
+  }
+  .topbar{
+    .icon-btn{
+      color:@topbar-icon-color;
+      &:hover{
+        color:@topbar-icon-hover;
+      }
+    }
+  }
+}
+#navigator {
+  background-color: @nav-bg;
+  color:@nav-text-color;
+  .nav-header{color:@nav-header-color;}
+  .nav{
+    li{
+      a{
+        color:@nav-text-color;
+        &:hover{
+          color:@nav-text-hover;
+          background-color:@nav-link-bg-hover;
+        }
+      }
+      &.active{
+        box-shadow:inset 5px 0 0 0 @theme-secondary;
+        background-color: @nav-active-bg;
+        >a{color:@nav-text-hover;}
+      }
+      &.unfold {
+        background-color:@nav-unfold-bg;
+      }
+    }
+    .sub-nav {
+      a{
+        color:@subnav-text-color;
+        &:hover {
+          color: @nav-text-hover;
+        }
+      }
+    }
+  }
+}
+/*¹ö¶¯Ìõ*/
+::-webkit-scrollbar-thumb {
+  background: rgba(0,0,0,.2);
+}
+::-webkit-scrollbar-thumb:hover{
+  background-color: @theme-secondary;
+}
+/*::-webkit-scrollbar-thumb:active{
+  background-color:darken(@theme-secondary,10%);
+}*/
+

@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>UI</title>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no"/>
+    <link rel="stylesheet" href="libs/bootstrap-3.3.2/dist/css/bootstrap.css"/>
+    <link rel="stylesheet" href="libs/font-awesome/font-awesome.min.css"/>
+    <link rel="stylesheet" href="css/ui.css"/>
+    <link id="mytheme" rel="stylesheet"/>
+    <script src="js/jquery-2.0.3.js"></script>
+    <script src="js/jquery-cookie.js"></script>
+    <script src="js/jquery.parsequery.js"></script>
+    <script src="js/3y.utils.js"></script>
+    <style>
+        html,body{height: 100%;}
+    </style>
+</head>
+<body>
+<header id="header">
+    <a href="#" class="logo">
+        <div class="logos"></div>
+        <h2 class="brand">数据平台</h2>
+    </a>
+    <div class="topbar">
+        <i class="pin_menu pull-right icon-btn">
+            <i class="icon-reorder"></i>
+        </i>
+        <i class="skin-switch pull-right icon-btn">
+            <i class="icon-magic"></i>
+        </i>
+        <i class="switch_menu icon-btn">
+            <i class="icon-reorder"></i>
+        </i>
+    </div>
+    <div id="skin-panel">
+        <div class="panel">
+            <div class="panel-heading">
+                <h3 class="panel-title">主题选择</h3>
+            </div>
+            <div class="panel-body">
+                <a class="blocker" href="javascript:;" data-theme="blue"></a>
+                <a class="blocker" href="javascript:;" data-theme="mint"></a>
+                <a class="blocker" href="javascript:;" data-theme="pink"></a>
+                <a class="blocker" href="javascript:;" data-theme="purple"></a>
+                <a class="blocker" href="javascript:;" data-theme="white"></a>
+            </div>
+            <div class="panel-footer text-right">
+                <a href="javascript:;" class="btn btn-primary"><i class="icon-refresh"></i> 恢复默认</a>
+            </div>
+        </div>
+
+    </div>
+</header>
+<section id="main-content">
+    <iframe id="mainframe" src="" frameborder="0"></iframe>
+</section>
+<i id="nav-placeholder"></i>
+<aside id="navigator">
+    <i class="logo-placeholder"></i>
+    <h2 class="nav-header">组件</h2>
+    <ul class="nav">
+        <li><a class="nav-link" href="javascript:;" url="button.html"><i class="icon-sign-blank"></i><span class="title">按钮</span></a></li>
+        <li><a class="nav-link" href="javascript:;" url="form.html"><i class="icon-edit"></i><span class="title">表单</span></a></li>
+        <li><a class="nav-link" href="javascript:;" url="panel.html"><i class="icon-columns"></i><span class="title">面板</span></a></li>
+        <li><a class="nav-link" href="javascript:;" url="table.html"><i class="icon-table"></i><span class="title">表格</span></a></li>
+    </ul>
+
+    <h2 class="nav-header">示例</h2>
+    <ul class="nav">
+        <li><a class="nav-link" href="javascript:;"><i class="icon-dashboard"></i><span class="title">一级导航</span></a></li>
+        <li class="unfold">
+            <a class="nav-title" href="javascript:;"><i class="icon-file"></i><span class="title">一级导航</span><i class="arrow icon-double-angle-right"></i></a>
+            <ul class="sub-nav" style="display:block;">
+                <li><a class="nav-link" href="javascript:;"><span class="title">二级导航</span></a></li>
+                <li><a class="nav-link" href="javascript:;"><span class="title">二级导航</span></a></li>
+                <li><a class="nav-link" href="javascript:;"><span class="title">二级导航</span></a></li>
+                <li><a class="nav-link" href="javascript:;"><span class="title">二级导航</span></a></li>
+            </ul>
+        </li>
+    </ul>
+</aside>
+<script src="js/frame.js"></script>
+<script>
+    $(function(){
+        myTheme.init();
+        // 自动根据地址栏中的hash载入相应的界面出来
+        function hashChange() {
+            var hash = location.hash;
+            hash = (hash || location.hash).substring(1);
+            var url = $.parseQuery({query: hash, separator: YYY_UTILS.querySeparator}).url;
+            if (url) {
+                $("#mainframe")[0].contentDocument.location.replace(url.replace('_', '?'));
+            }
+        }
+        //左侧导航链接跳转
+        $("#navigator").on('click', '.nav-link', function () {
+            var title = $(this).find(".title").text();
+            var url = $(this).attr('url');
+            if(!url){return;}
+            window.history.pushState('', '', "#title=" + title + "&&" + "url=" + url);
+            hashChange();
+            $('#navigator .nav li').removeClass("active");
+            $(this).closest("li").addClass("active");
+        });
+        window.onpopstate = function (e) {
+            hashChange();
+        };
+        //高亮当前菜单
+        function initSelectNav(){
+            var url = window.location.href;
+            $('#navigator .nav-link').each(function(){
+                var href = $(this).attr('url');
+                //console.log("href=",href,"title=",$(this).text())
+                if(url.indexOf(href) > 0){
+                    $('#navigator li.active').removeClass("active");
+                    $(this).closest("li").addClass("active");
+                    var $subnav=$(this).closest(".sub-nav");
+                    if($subnav){
+                        $subnav.siblings(".nav-title").trigger("click");
+                    }
+                    return false;
+                }
+            })
+        }
+        //入口
+        var init = (function () {
+            if (!location.hash) {
+                //首页展示的内容
+                var $default_navlink=$("#navigator .nav-link:first");
+                window.location.hash = "#title="+$default_navlink.text()+ "&&" + "url=" + $default_navlink.attr("url");
+                // $("iframe")[0].contentDocument.location.replace("/digger/productViewList");
+            } else {
+                hashChange();
+            }
+            initSelectNav();
+        })();
+        //主题选择
+        $(".skin-switch").on("click",function(){
+            var status=$(this).attr("switch")=="on";
+            myTheme.showThemePanel(status);
+        })
+        $("#skin-panel").on("click","a",function(){
+            var theme=$(this).data("theme");
+            myTheme.changeTheme(theme);
+        })
+    })
+    var myTheme={
+        init:function(){
+            this.$switch=$(".skin-switch");
+            this.$panel=$("#skin-panel");
+            this.$mytheme=$("#mytheme");
+            if($.cookie("mytheme")){
+                this.changeTheme($.cookie("mytheme"));
+            }
+        },
+        changeTheme:function(themeName){
+            if(themeName){
+                var url="css/theme/"+themeName+".css";
+                this.$mytheme.attr({"href":url});
+                $.cookie("mytheme",themeName);
+            }else{
+                this.$mytheme.attr({"href":""});
+                $.cookie("mytheme",null);
+            }
+            this.$panel.hide();
+            this.$switch.attr("switch",'off');
+        },
+        showThemePanel:function(flag){
+            if(flag){
+                this.$panel.hide();
+                this.$switch.attr("switch",'off');
+            }else{
+                this.$panel.show();
+                this.$switch.attr("switch",'on');
+            }
+        }
+    }
+</script>
+</body>
+</html>

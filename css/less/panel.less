@@ -1,0 +1,75 @@
+.panel{
+  border-radius: @panel-border-radius;
+  .box-shadow(0 2px 1px rgba(0,0,0,.1));
+  border-width:0;
+}
+.panel-heading{
+  padding: @panel-heading-padding;
+  border-bottom: 0px solid transparent;
+  border-radius:@panel-border-radius;
+}
+.panel-title{
+  line-height: 1.875;
+  padding: 5px 0px;
+  border-bottom:1px solid @panel-inner-border;
+}
+.panel-control{
+  height: 100%;
+  position: relative;
+  float: right;
+//  padding: 0 15px;
+  .btn{border:0;}
+  .btn-default{
+    background-color: transparent;
+  }
+}
+.panel-footer{
+  border-top-color:@panel-inner-border;
+  background-color:@panel-footer-bg;
+}
+// Contextual variations
+.panel-default {
+  .panel-variant(@panel-default-border; @panel-default-text; @panel-default-heading-bg; @panel-default-border);
+}
+.panel-primary {
+  .panel-variant(@panel-primary-border; @panel-primary-text; @panel-primary-heading-bg; @panel-primary-border);
+}
+.panel-success {
+  .panel-variant(@panel-success-border; @panel-success-text; @panel-success-heading-bg; @panel-success-border);
+}
+.panel-info {
+  .panel-variant(@panel-info-border; @panel-info-text; @panel-info-heading-bg; @panel-info-border);
+}
+.panel-warning {
+  .panel-variant(@panel-warning-border; @panel-warning-text; @panel-warning-heading-bg; @panel-warning-border);
+}
+.panel-danger {
+  .panel-variant(@panel-danger-border; @panel-danger-text; @panel-danger-heading-bg; @panel-danger-border);
+}
+.panel-mint {
+  .panel-variant(@panel-mint-border; @panel-mint-text; @panel-mint-heading-bg; @panel-mint-border);
+}
+.panel-pink {
+  .panel-variant(@panel-pink-border; @panel-pink-text; @panel-pink-heading-bg; @panel-pink-border);
+}
+.panel-purple {
+  .panel-variant(@panel-purple-border; @panel-purple-text; @panel-purple-heading-bg; @panel-purple-border);
+}
+.panel-dark {
+  .panel-variant(@panel-dark-border; @panel-dark-text; @panel-dark-heading-bg; @panel-dark-border);
+}
+.panel-default,
+.panel-primary,
+.panel-info,
+.panel-success,
+.panel-mint,
+.panel-warning,
+.panel-danger,
+.panel-pink,
+.panel-purple,
+.panel-dark{
+  & .panel-title{border-width:0px;}
+}
+/*collapsed_arrow*/
+.btn[aria-expanded=false] .icon-caret-down{display: inline-block; -webkit-transform: rotate(0deg)}
+.btn[aria-expanded=true] .icon-caret-down{display: inline-block; -webkit-transform: rotate(180deg)}
