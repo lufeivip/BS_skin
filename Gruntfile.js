@@ -1,70 +1,116 @@
 module.exports = function (grunt) {
+    //定义变量
+    var path={
+        src:"",
+        dist:"build"
+    }
     //编写Tasks
     grunt.initConfig({
         pkg:grunt.file.readJSON('package.json'),
-        path:{
-            src:"",
-            dist:"build"
-        },
+        path:path,
         banner:'/*\n' +
             '* version:V<%=pkg.version%>' +
             '*/',
         /*Tasks start*/
         clean:{
-            'dist':{
+            tmp:{
+                src:['.tmp/']
+            },
+            dist:{
                 src:['<%=path.dist%>/**/*']
+            }
+        },
+        useminPrepare:{
+            html: ['*.html'],
+            options:{
+                dest:"build"
+            }
+        },
+        less:{
+            compileCore:{
+                options:{
+                    sourceMap:true,
+                    sourceMapURL:'ui.css.map',
+                    sourceMapFilename: 'css/ui.css.map'
+                },
+                files:[
+                    {'css/ui.css':'css/ui.less'}
+                ]
+            },
+            skin:{
+                options:{
+                    //sourceMap:true
+                },
+                files:[
+                    {'css/theme/blue.css':'css/theme/blue.less'},
+                    {'css/theme/mint.css':'css/theme/mint.less'},
+                    {'css/theme/pink.css':'css/theme/pink.less'},
+                    {'css/theme/purple.css':'css/theme/purple.less'},
+                    {'css/theme/white.css':'css/theme/white.less'}
+                ]
             }
         },
         copy:{
             html:{
                 expand:true,
-                cwd:'<%= path.src %>/',
+                cwd:'<%= path.src %>',
                 src:['*.html'],
                 dest:'<%= path.dist %>/'
             },
+            libs:{
+                expand:true,
+                cwd:'libs',
+                src:['**/*'],
+                dest:'<%= path.dist %>/libs'
+            },
+            js:{
+                expand:true,
+                cwd:'js/',
+                src:'{3y.utils,frame}.js',
+                dest:'<%= path.dist %>/js/'
+            },
             css:{
-                src:'<%= path.src %>/css/**/*.{css,map,png,jpg,gif}',
+                expand:true,
+                src:'css/**/*.{css,map,png,jpg,gif}',
                 dest:'<%= path.dist %>/'
             },
             images:{
-                src:'<%= path.src %>/images/**/*',
+                expand:true,
+                src:'images/**/*',
                 dest:'<%= path.dist %>/'
             }
         },
-        useminPrepare:{
-            html: ['<%= path.src %>/*.html'],
-            options:{
-                'dest':'<%= path.dist %>/'
-            }
-        },
-        less:{
-            compileCore:{
-                'options':{
-                    'sourceMap':true
-                },
-                files:{
-                    '<%= path.src %>/css/ui.css':['<%= path.src %>/css/ui.less']
-                }
-            }
-        },
         concat:{
-            'libs':{
+            libs:{
                 src:[
                     'js/jquery-2.0.3.js',
                     'js/jquery-cookie.js',
                     'js/jquery.parsequery.js'
                 ],
-                dest:'js/dist/libs.js'
+                dest:'<%= path.dist %>/js/libs.js'
+            }
+        },
+        uglify:{
+            libs:{
+                files: [{
+                    expand: true,
+                    cwd: '<%= path.dist %>/js/',
+                    src: '**/*.js',
+                    dest: '<%= path.dist %>/js/'
+                }]
             }
         },
         usemin:{
             options:{
-                'assetsDirs':['build']
+                assetsDirs:['build']
             },
-            html:['build/*.html'],
-            css:['build/**/*.css'],
-            images:['build/**/*.png']
-
+            html:['<%= path.dist %>/*.html'],
+            css:{
+                options:{
+                  assetsDirs:['<%= path.dist %>/css/**']
+                },
+                src:['<%= path.dist %>/css/**/*.css']
+            }
         },
         filerev:{
             options: {
@@ -73,33 +119,58 @@ module.exports = function (grunt) {
             },
             images:{
                 expand:true,
-                cwd:'css/newui/',
-                src:'test.png',
-                dest:'build/css/newui/'
+                cwd:'<%= path.dist %>/css/',
+                src:'**/*.{png,jpg,jpeg,gif}',
+                dest:'<%= path.dist %>/css/'
             },
             css:{
                 expand:true,
-                cwd:'css/newui/',
-                src:'*.css',
-                dest:'build/css/newui/'
+                //mathchBase:true,
+                cwd:'<%= path.dist %>/css/',
+                src:['*.css'],
+                dest:'<%= path.dist %>/css/'
+            },
+            js:{
+                expand:true,
+                cwd:'<%= path.dist %>/js/',
+                src:['*.js'],
+                dest:'<%= path.dist %>/js/'
             }
         },
         htmlmin:{
-            'htmls':{
+            htmls:{
                 options: {
                     minifyJS:true,
                     removeComments: true,
                     collapseWhitespace: true
                 },
                 files:{
-                    'build/frame.min.html' : 'build/frame.html'
+                    'build/index.html' : 'build/index.html',
+                    'build/button.html' : 'build/button.html',
+                    'build/form.html' : 'build/form.html',
+                    'build/panel.html' : 'build/panel.html',
+                    'build/table.html' : 'build/table.html',
+                    'build/test.html' : 'build/tpl_test.html'
                 }
             }
         }
     });
     //自动加载package.json里的依赖
     require('load-grunt-tasks')(grunt, { scope: 'devDependencies' });
+    require('time-grunt')(grunt);
     //注册Tasks
     grunt.registerTask('default',['less']);
+    grunt.registerTask('test',[
+        'less',
+        'clean',
+        'copy',
+        'useminPrepare',
+        'concat',
+        'uglify',
+        'filerev',
+        'usemin',
+        'htmlmin',
+        'clean:tmp'
+    ]);
 
 };

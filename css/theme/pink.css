@@ -1,0 +1,57 @@
+/*=======================*/
+#header {
+  background-color: #ffffff;
+  border-bottom: 1px solid #eee;
+}
+#header .logo {
+  background: url("../img/logo_s.png") no-repeat 0 -50px;
+}
+#header .logo:before {
+  background: url("../img/logo_s.png") no-repeat 0 0 #eb70a4;
+}
+#header .topbar .icon-btn {
+  color: #666666;
+}
+#header .topbar .icon-btn:hover {
+  color: #da5f93;
+}
+#navigator {
+  background-color: #da5f93;
+  color: #ffd4e6;
+}
+#navigator .nav-header {
+  color: rgba(255, 255, 255, 0.4);
+}
+#navigator .nav li a {
+  color: #ffd4e6;
+}
+#navigator .nav li a:hover {
+  color: #ffffff;
+  background-color: transperant;
+}
+#navigator .nav li.active {
+  box-shadow: inset 5px 0 0 0 #5fdaa6;
+  background-color: rgba(255, 255, 255, 0.1);
+}
+#navigator .nav li.active > a {
+  color: #ffffff;
+}
+#navigator .nav li.unfold {
+  background-color: rgba(0, 0, 0, 0.07);
+}
+#navigator .nav .sub-nav a {
+  color: #eec3d5;
+}
+#navigator .nav .sub-nav a:hover {
+  color: #ffffff;
+}
+/*������*/
+::-webkit-scrollbar-thumb {
+  background: rgba(0, 0, 0, 0.2);
+}
+::-webkit-scrollbar-thumb:hover {
+  background-color: #5fdaa6;
+}
+/*::-webkit-scrollbar-thumb:active{
+  background-color:darken(@theme-secondary,10%);
+}*/

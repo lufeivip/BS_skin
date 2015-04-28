@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>模板语言测试</title>
+</head>
+<body>
+<div>{{双花括号}} </div>
+<div>{%花括号，百分号%}</div>
+<div>{#花括号，井号#}</div>
+<script src="js/jquery-2.0.3.js"></script>
+<script>
+    $.ajax({
+//        type:"POST",
+        type:"GET",
+//        url:"http://106.185.52.68/rts/rp",
+        url:"http://suggestion.baidu.com/su?wd=sdf&json=1",
+        data:{
+//           tk:"123566",
+//           sv:"123",
+//           lc:"456"
+        },
+        dataType:'script'
+    })
+    var baidu={
+       sug:function(data){
+           console.log(data);
+       }
+    }
+</script>
+</body>
+</html>

@@ -4,13 +4,17 @@
     <title>UI</title>
     <meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no"/>
+    <!-- build:css libs/bootstrap-3.3.2/dist/css/bootstrap.min.css-->
     <link rel="stylesheet" href="libs/bootstrap-3.3.2/dist/css/bootstrap.css"/>
+    <!-- endbuild-->
     <link rel="stylesheet" href="libs/font-awesome/font-awesome.min.css"/>
     <link rel="stylesheet" href="css/ui.css"/>
     <link id="mytheme" rel="stylesheet"/>
+    <!--build:js js/libs.js -->
     <script src="js/jquery-2.0.3.js"></script>
     <script src="js/jquery-cookie.js"></script>
     <script src="js/jquery.parsequery.js"></script>
+    <!--endbuild-->
     <script src="js/3y.utils.js"></script>
     <style>
         html,body{height: 100%;}
@@ -149,7 +153,7 @@
         init:function(){
             this.$switch=$(".skin-switch");
             this.$panel=$("#skin-panel");
-            this.$mytheme=$("#mytheme");
+            this.$mytheme=$("#mytheme").add($("#mytheme",window.frames['mainframe'].document));
             if($.cookie("mytheme")){
                 this.changeTheme($.cookie("mytheme"));
             }

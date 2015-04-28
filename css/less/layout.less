@@ -18,14 +18,17 @@
     height: 50px;
     background:url(img/logo_s.png) no-repeat 0 -50px ;
     .logos,.brand{display: none;}
+    @bgcolor:@bg-drak+#111;
     &:before{
       content: "";
       width:100%;
       height: 100%;
       position: absolute;
-      left:0; top:0;
+      left:0;
+      top:0;
       z-index: 2;
-      background:url("img/logo_s.png") no-repeat 0 0px @bg-drak+ #111;
+      background:url("img/logo_s.png") no-repeat 0 0px;
+      background-color: @bg-drak+#111;
       .transition(width .3s);
     }
   }
